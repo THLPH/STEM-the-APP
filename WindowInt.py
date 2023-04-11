@@ -26,7 +26,8 @@ def empdb():
         cursor = conn.cursor()
         # creating STUD_REGISTRATION table
         cursor.execute(
-            "CREATE TABLE IF NOT EXISTS STUD_REGISTRATION (STU_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, STU_NAME TEXT, STU_CONTACT TEXT, STU_EMAIL TEXT, STU_ROLLNO TEXT, STU_BRANCH TEXT)")
+            "CREATE TABLE IF NOT EXISTS STUD_REGISTRATION (STU_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+            "STU_NAME TEXT, STU_CONTACT TEXT, STU_EMAIL TEXT, STU_ROLLNO TEXT, STU_BRANCH TEXT)")
 
     # defining function for creating GUI Layout
     def DisplayForm():
@@ -50,35 +51,42 @@ def empdb():
         TopViewForm = Frame(display_screen, width=600, bd=1, relief=SOLID)
         TopViewForm.pack(side=TOP, fill=X)
         # first left frame for registration from
-        LFrom = Frame(display_screen, width="350")
+        LFrom = Frame(display_screen, width="350", bg="#1a1716")
         LFrom.pack(side=LEFT, fill=Y)
-        # seconf left frame for search form
+        # second left frame for search form
         LeftViewForm = Frame(display_screen, width=500, bg="gray")
         LeftViewForm.pack(side=LEFT, fill=Y)
-        # mid frame for displaying students record
+        # mid-frame for displaying students record
         MidViewForm = Frame(display_screen, width=600)
         MidViewForm.pack(side=RIGHT)
         # label for heading
-        lbl_text = Label(TopViewForm, text="Employee Management System", font=('verdana', 18), width=600, bg="#1C2833",
+        lbl_text = Label(TopViewForm, text="Employee Management System", font=('verdana', 18), width=600, bg="black",
                          fg="white")
         lbl_text.pack(fill=X)
         # creating registration form in first left frame
-        Label(LFrom, text="Name  ", font=("Arial", 12)).pack(side=TOP)
-        Entry(LFrom, font=("Arial", 10, "bold"), textvariable=name).pack(side=TOP, padx=10, fill=X)
-        Label(LFrom, text="Contact ", font=("Arial", 12)).pack(side=TOP)
-        Entry(LFrom, font=("Arial", 10, "bold"), textvariable=contact).pack(side=TOP, padx=10, fill=X)
-        Label(LFrom, text="Email ", font=("Arial", 12)).pack(side=TOP)
-        Entry(LFrom, font=("Arial", 10, "bold"), textvariable=email).pack(side=TOP, padx=10, fill=X)
-        Label(LFrom, text="Rollno ", font=("Arial", 12)).pack(side=TOP)
-        Entry(LFrom, font=("Arial", 10, "bold"), textvariable=rollno).pack(side=TOP, padx=10, fill=X)
-        Label(LFrom, text="Branch ", font=("Arial", 12)).pack(side=TOP)
-        Entry(LFrom, font=("Arial", 10, "bold"), textvariable=branch).pack(side=TOP, padx=10, fill=X)
-        Button(LFrom, text="Submit", font=("Arial", 10, "bold"), command=register).pack(side=TOP, padx=10, pady=5,
-                                                                                        fill=X)
+        Label(LFrom, text="Name  ", font=("Kozuka Mincho Pr6N B", 12), bg="#1a1716", fg="white").pack(side=TOP, pady=10)
+        Entry(LFrom, font=("Kozuka Mincho Pr6N B", 10, "bold"), textvariable=name).pack(side=TOP, padx=10, fill=X)
+        Label(LFrom, text="Contact ", font=("Kozuka Mincho Pr6N B", 12), bg="#1a1716", fg="white").pack(side=TOP,
+                                                                                                        pady=10)
+        Entry(LFrom, font=("Kozuka Mincho Pr6N B", 10, "bold"), textvariable=contact).pack(side=TOP, padx=10, fill=X)
+        Label(LFrom, text="Email ", font=("Kozuka Mincho Pr6N B", 12), bg="#1a1716", fg="white").pack(side=TOP, pady=10)
+        Entry(LFrom, font=("Kozuka Mincho Pr6N B", 10, "bold"), textvariable=email).pack(side=TOP, padx=10, fill=X)
+        Label(LFrom, text="Rollno ", font=("Kozuka Mincho Pr6N B", 12), bg="#1a1716", fg="white").pack(side=TOP,
+                                                                                                       pady=10)
+        Entry(LFrom, font=("Kozuka Mincho Pr6N B", 10, "bold"), textvariable=rollno).pack(side=TOP, padx=10, fill=X)
+        Label(LFrom, text="Branch ", font=("Kozuka Mincho Pr6N B", 12), bg="#1a1716", fg="white").pack(side=TOP,
+                                                                                                       pady=10)
+        Entry(LFrom, font=("Kozuka Mincho Pr6N B", 10, "bold"), textvariable=branch).pack(side=TOP, padx=10, fill=X)
+        Button(LFrom, text="Submit", font=("Kozuka Mincho Pr6N B", 10, "bold"), command=register).pack(side=TOP,
+                                                                                                       padx=10, pady=15,
+                                                                                                       fill=X)
+        # creating delete button
+        btn_delete = Button(LFrom, text="Delete", font=("Arial", 10, "bold"), command=Delete)
+        btn_delete.pack(side=TOP, padx=10, pady=20, fill=X)
 
         # creating search label and entry in second frame
-        lbl_txtsearch = Label(LeftViewForm, text="Enter name to Search", font=('verdana', 10), bg="gray")
-        lbl_txtsearch.pack()
+        lbl_txtsearch = Label(LeftViewForm, text="Search for Name", font=('verdana', 15), bg="gray")
+        lbl_txtsearch.pack(pady=10)
         # creating search entry
         search = Entry(LeftViewForm, textvariable=SEARCH, font=('verdana', 15), width=10)
         search.pack(side=TOP, padx=10, fill=X)
@@ -91,15 +99,17 @@ def empdb():
         # creating reset button
         btn_reset = Button(LeftViewForm, text="Reset", command=Reset)
         btn_reset.pack(side=TOP, padx=10, pady=10, fill=X)
-        # creating delete button
-        btn_delete = Button(LeftViewForm, text="Delete", command=Delete)
-        btn_delete.pack(side=TOP, padx=10, pady=10, fill=X)
         # setting scrollbar
         scrollbarx = Scrollbar(MidViewForm, orient=HORIZONTAL)
         scrollbary = Scrollbar(MidViewForm, orient=VERTICAL)
+        styletree = ttk.Style()
+        styletree.configure("Treeview", background='#1a1716', foreground='white', fieldbackground='#1a1716')
+        styletree.map('Treeview',background=[('selected', '#3d3d3d')])
+
         tree = ttk.Treeview(MidViewForm, columns=("Student Id", "Name", "Contact", "Email", "Rollno", "Branch"),
                             selectmode="extended", height=100, yscrollcommand=scrollbary.set,
                             xscrollcommand=scrollbarx.set)
+        styletree.theme_use('alt')
         scrollbary.config(command=tree.yview)
         scrollbary.pack(side=RIGHT, fill=Y)
         scrollbarx.config(command=tree.xview)
@@ -382,15 +392,16 @@ def open_popup():
     # making frames
     welcome_page = CTkFrame(master=root)
     login_check_screen = CTkFrame(master=root)
-    initiateBTN = CTkButton(master=welcome_page, text="Initiate", command=inibutton)
+    # bypass log in here
+    initiateBTN = CTkButton(master=welcome_page, text="Initiate", command=bypass)
 
     # --------------------Welcome Page----------------------
     root.protocol('WM_DELETE_WINDOW', close_app)
-    welcomeTle = CTkLabel(master=welcome_page, text="Hello! Welcome to The App")
-    welcomeTle.pack(pady=(20, 20))
-    welcomeTle.configure(font=('Kozuka Mincho Pr6N B', 17))
-    initiateBTN.pack(padx=62, pady=(20, 160))
-    initiateBTN.pack()
+    welcomeTle = CTkLabel(master=welcome_page, text="The APP")
+    welcomeTle.pack(pady=(20, 10))
+    welcomeTle.configure(font=('Kozuka Mincho Pr6N B', 27))
+    CTkLabel(master=welcome_page, text="Hello! Welcome!").pack()
+    initiateBTN.pack(padx=62, pady=(10, 150))
     welcome_page.pack()
 
     # --------------------Login Page----------------------
@@ -488,9 +499,9 @@ def apple():
     f1.destroy()
     f2 = CTkFrame(master=top, width=900, height=500)
     f2.place(x=0, y=45)
-    l2 = CTkLabel(f2, text='Apple')
+    l2 = CTkLabel(f2, text='Comming Soon')
     l2.configure(font=('Kozuka Mincho Pr6N B', 90))
-    l2.place(x=320, y=150 - 45)
+    l2.place(x=210, y=150)
     toggle_win()
 
 
@@ -498,9 +509,9 @@ def acer():
     f1.destroy()
     f2 = CTkFrame(master=top, width=900, height=500)
     f2.place(x=0, y=45)
-    l2 = CTkLabel(f2, text='Acer')
+    l2 = CTkLabel(f2, text='Coming Soon')
     l2.configure(font=('Kozuka Mincho Pr6N B', 90))
-    l2.place(x=320, y=150 - 45)
+    l2.place(x=210, y=150)
     toggle_win()
 
 
