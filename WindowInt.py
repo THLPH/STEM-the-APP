@@ -10,33 +10,22 @@ import tkinter.ttk as ttk
 import tkinter.messagebox as tkMessageBox
 import sqlite3
 import hashlib
-from tkcalendar import Calendar
 import time
-#clock = Label(app_window, font=("Boulder", 68, 'bold'), bg="black", fg="red", bd=25)
-# clock.pack()
-#
-# def digital_clock():
-#    time_live = time.strftime("%H:%M:%S")
-#    clock.config(text=time_live)
-#    clock.after(200, digital_clock)
-#
-# digital_clock()
-# Create Object
-
-# cal = Calendar(root, selectmode='day')
-# cal.pack(pady=20)
-# date = Label(root, text="")
-# date.pack(pady=20)
-
-
-
+from tkcalendar import Calendar
 
 # database
 # username_list = ["hero", "bubo", "goni", "rock", "pipe", "wexp"]
 # password_list = ['3726', '1234', '1234', '1234', '1234', '1234']
 
 
-# Defining employee database
+def calendar():
+    dis_screen = CTkToplevel(top)
+    cal = Calendar(top, selectmode='day')
+    cal.pack(pady=20)
+    date = Label(top, text="")
+    date.pack()
+
+
 def empdb():
     # function to define database
     def Database():
@@ -124,7 +113,7 @@ def empdb():
         scrollbary = Scrollbar(MidViewForm, orient=VERTICAL)
         styletree = ttk.Style()
         styletree.configure("Treeview", background='#1a1716', foreground='white', fieldbackground='#1a1716')
-        styletree.map('Treeview',background=[('selected', '#3d3d3d')])
+        styletree.map('Treeview', background=[('selected', '#3d3d3d')])
 
         tree = ttk.Treeview(MidViewForm, columns=("Student Id", "Name", "Contact", "Email", "Rollno", "Branch"),
                             selectmode="extended", height=100, yscrollcommand=scrollbary.set,
@@ -459,6 +448,15 @@ top.title("The APP")
 top.resizable(0, 0)
 
 top.iconbitmap('favicon.ico')
+clock = Label(top, font=("Boulder", 30, 'bold'), bg="#5A5A5A", fg="white", width=10,
+          height=1, borderwidth=3, relief="ridge")
+clock.place(x=870, y=3)
+def digital_clock():
+    time_live = time.strftime("%H:%M:%S")
+    clock.config(text=time_live)
+    clock.after(200, digital_clock)
+
+digital_clock()
 
 
 def default_home():
@@ -515,15 +513,15 @@ def Database():
     empdb()
 
 
-def apple():
+def Calendar():
     f1.destroy()
     f2 = CTkFrame(master=top, width=900, height=500)
     f2.place(x=0, y=45)
-    l2 = CTkLabel(f2, text='Comming Soon')
+    l2 = CTkLabel(f2, text='Coming Soon')
     l2.configure(font=('Kozuka Mincho Pr6N B', 90))
     l2.place(x=210, y=150)
     toggle_win()
-
+    calendar()
 
 def acer():
     f1.destroy()
@@ -539,6 +537,7 @@ def toggle_win():
     global f1
     f1 = CTkFrame(master=top, width=200, height=500, fg_color='#333333')
     f1.place(x=0, y=0)
+
 
     # buttons
     def bttn(x, y, text, bcolor, fcolor, cmd):
@@ -561,7 +560,7 @@ def toggle_win():
     bttn(10, 191, 'C R A C K E R ', '#0f9d9a', '#12c4c0', Pw_Cracker)
     bttn(10, 154, 'G E N E R A T O R ', '#0f9d9a', '#12c4c0', Pw_Generator)
     bttn(10, 117, 'D A T A B A S E ', '#0f9d9a', '#12c4c0', Database)
-    bttn(10, 228, 'A P P L E ', '#0f9d9a', '#12c4c0', apple)
+    bttn(10, 228, 'C A L E N D A R ', '#0f9d9a', '#12c4c0', Calendar)
     bttn(10, 265, 'A C E R ', '#0f9d9a', '#12c4c0', acer)
 
     def dele():
