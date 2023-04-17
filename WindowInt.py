@@ -10,10 +10,30 @@ import tkinter.ttk as ttk
 import tkinter.messagebox as tkMessageBox
 import sqlite3
 import hashlib
+from tkcalendar import Calendar
+import time
+#clock = Label(app_window, font=("Boulder", 68, 'bold'), bg="black", fg="red", bd=25)
+# clock.pack()
+#
+# def digital_clock():
+#    time_live = time.strftime("%H:%M:%S")
+#    clock.config(text=time_live)
+#    clock.after(200, digital_clock)
+#
+# digital_clock()
+# Create Object
+
+# cal = Calendar(root, selectmode='day')
+# cal.pack(pady=20)
+# date = Label(root, text="")
+# date.pack(pady=20)
+
+
+
 
 # database
-username_list = ["hero", "bubo", "goni", "rock", "pipe", "wexp"]
-password_list = ['3726', '1234', '1234', '1234', '1234', '1234']
+# username_list = ["hero", "bubo", "goni", "rock", "pipe", "wexp"]
+# password_list = ['3726', '1234', '1234', '1234', '1234', '1234']
 
 
 # Defining employee database
